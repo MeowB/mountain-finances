@@ -22,9 +22,11 @@ The Personal Finance App is a full-featured financial management application des
 
 ### Week 1:
 
-Configure PostgreSQL and ensure database migrations work correctly.
+~~Setup the Django project and create the initial project structure.~~
 
-Develop API endpoints for user accounts and financial data.
+~~Configure PostgreSQL and ensure database migrations work correctly.~~
+
+Implement the user authentication system and account management.
 
 Start structuring the frontend with a basic layout and navigation.
 

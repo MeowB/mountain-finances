@@ -1,0 +1,124 @@
+@import '../../styles/variables.scss';
+
+header {
+	width: 100%;
+	background-color: $c-grey-900;
+	height: 70px;
+	border-radius: 0 0px 8px 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	display: flex;
+	height: calc(100vh - 70px);
+	justify-content: center;
+	align-items: center;
+
+	.left {
+		display: none;
+	}
+
+	.login-form {
+		background-color: $c-white;
+		padding: 24px 20px;
+		min-width: 340px;
+		max-width: 560px;
+		width: 100%;
+		border-radius: 12px;
+		margin: 16px;
+
+		.inputs {
+			display: flex;
+			flex-direction: column;
+
+			margin: 32px 0;
+
+			label:nth-child(3) {
+				margin-top: 16px;
+			}
+
+			label {
+				@include text-preset-5-bold;
+				color: $c-grey-500
+			}
+
+			input {
+				padding: 12px 20px;
+			}
+
+			input[type=submit] {
+				@include text-preset-4-bold;
+				margin-top: 32px;
+				background-color: $c-grey-900;
+				color: $c-white;
+				border: none;
+				border-radius: 8px;
+			}
+		}
+
+		p {
+			@include text-preset-4;
+			text-align: center;
+			color: $c-grey-500;
+
+			a {
+				color: $c-grey-900;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1440px) {
+	header {
+		display: none;
+	}
+
+
+	main {
+		display: grid;
+		height: 100vh;
+
+		grid-template-columns: 2fr 3fr;
+
+		.left {
+			height: calc(100% - 40px);
+			margin: 15px;
+			border-radius: 15px;
+			display: inline-block;
+			background-image: url('../../assets/loginIllustration.svg');
+			background-repeat: no-repeat;
+			background-size: cover;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+			img {
+				margin: 40px;
+				width: 120px;
+			}
+
+			.text {
+				color: $c-white;
+				margin: 0 40px;
+
+				h2 {
+					@include text-preset-1
+				}
+
+				p {
+					margin-top: 24px;
+					margin-bottom: 40px;
+				}
+			}
+		}
+
+		.login-form {
+			justify-self: center;
+		}
+	}
+
+}

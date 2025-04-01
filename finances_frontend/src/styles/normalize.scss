@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import './variables.scss';
+
+* {
+	font-family: 'public sans';
+}
+
+header, main, footer, html {
+	background-color: $c-beige-100
+}

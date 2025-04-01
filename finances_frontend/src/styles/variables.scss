@@ -1,0 +1,73 @@
+// COLORS
+
+// primary
+$c-beige-500: #98908B;
+$c-beige-100: #F8F4F0;
+
+$c-grey-900: #201f24;
+$c-grey-500: #696868;
+$c-grey-300: #b3b3b3;
+$c-grey-100: #f2f2f2;
+
+// secondary
+$c-green: #277c78;
+$c-yellow: #f2cdac;
+$c-cyan: #82c9d7;
+$c-navy: #626070;
+$c-red: #c94736;
+$c-purple-secondary: #826cb0;
+
+// others
+$c-purple-other: #af81ba;
+$c-turquoise: #597c7c;
+$c-brown: #93674f;
+$c-magenta: #934f6f;
+$c-blue: #3f82b2;
+$c-navy-grey: #97a0ac;
+$c-army-green: #7f9161;
+$c-gold: #cab361;
+$c-orange: #be6c49;
+$c-white: #fff;
+
+@mixin text-preset-1 {
+	font-size: 32px;
+	line-height: 120%;
+	letter-spacing: 0;
+	font-weight: bold;
+}
+
+@mixin text-preset-2 {
+	font-size: 20px;
+	line-height: 120%;
+	letter-spacing: 0;
+	font-weight: bold;
+}
+
+@mixin text-preset-3 {
+	font-size: 16px;
+	line-height: 150%;
+	letter-spacing: 0;
+	font-weight: bold;
+}
+@mixin text-preset-4 {
+	font-size: 14px;
+	line-height: 150%;
+	letter-spacing: 0;
+}
+@mixin text-preset-4-bold {
+	font-size: 14px;
+	line-height: 150%;
+	letter-spacing: 0;
+	font-weight: bold;
+}
+@mixin text-preset-5 {
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: 0;
+}
+@mixin text-preset-5-bold {
+	font-size: 12px;
+	line-height: 150%;
+	letter-spacing: 0;
+	font-weight: bold;
+}
