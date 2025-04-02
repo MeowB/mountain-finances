@@ -1,8 +1,14 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss' as vars;
+
+
+.red-border {
+	border: 2px solid red;
+}
+
 
 header {
 	width: 100%;
-	background-color: $c-grey-900;
+	background-color: vars.$c-grey-900;
 	height: 70px;
 	border-radius: 0 0px 8px 8px;
 	display: flex;
@@ -21,7 +27,7 @@ main {
 	}
 
 	.login-form {
-		background-color: $c-white;
+		background-color: vars.$c-white;
 		padding: 24px 20px;
 		min-width: 340px;
 		max-width: 560px;
@@ -35,13 +41,15 @@ main {
 
 			margin: 32px 0;
 
-			label:nth-child(3) {
-				margin-top: 16px;
-			}
 
 			label {
-				@include text-preset-5-bold;
-				color: $c-grey-500
+				margin-top: 16px;
+				@include vars.text-preset-5-bold;
+				color: vars.$c-grey-500
+			}
+
+			label:nth-child(1) {
+				margin-top: 0;
 			}
 
 			input {
@@ -49,25 +57,31 @@ main {
 			}
 
 			input[type=submit] {
-				@include text-preset-4-bold;
+				@include vars.text-preset-4-bold;
 				margin-top: 32px;
-				background-color: $c-grey-900;
-				color: $c-white;
+				background-color: vars.$c-grey-900;
+				color: vars.$c-white;
 				border: none;
 				border-radius: 8px;
 			}
 		}
 
 		p {
-			@include text-preset-4;
+			@include vars.text-preset-4;
 			text-align: center;
-			color: $c-grey-500;
+			color: vars.$c-grey-500;
 
 			a {
-				color: $c-grey-900;
+				color: vars.$c-grey-900;
 				font-weight: bold;
 				text-decoration: underline;
+				cursor: pointer;
 			}
+		}
+
+		.error {
+			color: red;
+			text-align: start;
 		}
 	}
 }
@@ -102,11 +116,12 @@ main {
 			}
 
 			.text {
-				color: $c-white;
+				color: vars.$c-white;
 				margin: 0 40px;
+				text-shadow: 1px 1px 3px black;
 
 				h2 {
-					@include text-preset-1
+					@include vars.text-preset-1
 				}
 
 				p {

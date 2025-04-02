@@ -1,9 +1,12 @@
 import logo from '../../assets/Logo.png'
-import image from '../../assets/loginIllustration.svg'
 import './LoginPage.scss'
-import PasswordInput from '../../components/PasswordInput/PasswordInput'
+import LoginForm from '../../components/LoginForm/LoginForm'
+import RegisterForm from '../../components/RegisterForm/RegisterForm'
+import { useState } from 'react'
 
 const LoginPage = () => {
+	let [register, setRegister] = useState(false)
+
 	return (
 		<>
 			<header>
@@ -20,18 +23,10 @@ const LoginPage = () => {
 						<p>Personal finance app puts you in control of your spending. Track transactions, set budgets, and add to savings pots easily</p>
 					</div>
 				</div>
-				<form className='login-form' action="post">
-					<h1>Login</h1>
-					<div className="inputs">
-						<label htmlFor="email">Email</label>
-						<input type="email" />
-						<label htmlFor="password">Password</label>
-						<PasswordInput />
-						<input type="submit" value="Login" />
-					</div>
-
-					<p>Need to create an account ? <a href="#">Sign Up</a></p>
-				</form>
+				{register
+					? <RegisterForm register={register} setRegister={setRegister} />
+					: <LoginForm register={register} setRegister={setRegister} />
+				}
 			</main>
 		</>
 	)
