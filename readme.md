@@ -1,43 +1,36 @@
-# Personal Finance App
+# Personal Finance App  
 
-## Overview
-The Personal Finance App is a full-featured financial management application designed to help users track income, expenses, savings, and recurring payments. It includes a customizable dashboard and a robust backend to ensure secure and efficient data handling.
+## Overview  
+The **Personal Finance App** is a comprehensive financial management application that helps users track income, expenses, savings, and recurring payments. The app features a customizable dashboard and a secure backend for efficient data handling.  
 
-## Features
-- User authentication system with secure account management.
-- Dashboard with an overview of financial data.
-- Tabs for transactions, budget management, savings pots, recurring bills, and income tracking.
-- PostgreSQL database for reliable data storage.
-- Django backend for structured API management.
-- React frontend with TypeScript for an interactive and user-friendly experience.
-- Widget-based dashboard allowing users to personalize their layout.
+## Features  
+- Secure **user authentication** and account management.  
+- **Dashboard** providing an overview of financial data.  
+- **Transaction management**, budget tracking, and savings pots.  
+- **Recurring payments** and income tracking.  
+- **PostgreSQL database** for reliable and scalable data storage.  
+- **Golang backend** with GIN framework for structured API management.  
+- **React frontend with TypeScript** for a dynamic and user-friendly experience.  
+- **Customizable, widget-based dashboard** for personalized user layouts.  
 
-## Technology Stack
-- **Backend:** Django, PostgreSQL
-- **Frontend:** React, TypeScript
-- **Database:** PostgreSQL
+## Technology Stack  
+- **Backend:** Golang, GIN (for API management), pgx (PostgreSQL driver), JWT-go (for authentication).
+- **Frontend:** React, TypeScript  
+- **Database:** PostgreSQL  
 
+## Roadmap  
 
-## Roadmap
+### **Week 1**  
+✅ **Set up the Golang project** with the GIN framework.  
+✅ **Configure PostgreSQL** and ensure database migrations work correctly.  
+🔲 Implement **user authentication** (JWT-based authentication and account management).  
+🔲 Start structuring the frontend with a **basic layout and navigation**.  
 
-### Week 1:
+### **Week 2**  
+🔲 Implement **CRUD operations** for transactions and income tracking.  
+🔲 Develop the **dashboard** with financial data summaries.  
+🔲 Create components for **budget management** and **savings pots**.  
+🔲 Ensure **API integration** between the backend and frontend.  
+🔲 Begin working on **authentication and data persistence**.  
 
-~~Setup the Django project and create the initial project structure.~~
-
-~~Configure PostgreSQL and ensure database migrations work correctly.~~
-
-Implement the user authentication system and account management.
-
-Start structuring the frontend with a basic layout and navigation.
-
-### Week 2:
-
-Implement CRUD operations for transactions and income tracking.
-
-Develop the dashboard with a summary of financial data.
-
-Create components for budget management and savings pots.
-
-Ensure API integration between the backend and frontend.
-
-Begin working on authentication and data persistence.
+Would you like me to break down the authentication system or the API structure in more detail? 🚀
