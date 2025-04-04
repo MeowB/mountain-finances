@@ -5,6 +5,8 @@ import (
 
 	"backend/database"
 
+	"backend/routes"
+
 	"github.com/gin-gonic/gin" // framework
 )
 
@@ -20,6 +22,9 @@ func main() {
 	router.GET("/", func(context *gin.Context) {
 		context.JSON(http.StatusOK, gin.H{"message": "Backend is running!"})
 	})
+
+	router.POST("/register", routes.RegisterUser)
+	router.GET("/getUsers", routes.SelectUsers)
 
 	router.Run(":8000")
 }
