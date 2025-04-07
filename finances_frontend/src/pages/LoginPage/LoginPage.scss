@@ -16,7 +16,7 @@ header {
 	align-items: center;
 }
 
-main {
+.login-page {
 	display: flex;
 	height: calc(100vh - 70px);
 	justify-content: center;
@@ -92,7 +92,7 @@ main {
 	}
 
 
-	main {
+	.login-page {
 		display: grid;
 		height: 100vh;
 

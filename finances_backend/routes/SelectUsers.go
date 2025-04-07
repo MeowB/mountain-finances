@@ -5,15 +5,10 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
-
-type User struct {
-	ID       int    `json:"id"`
-	Username string `json:"username"`
-	Email    string `json:"email"`
-}
 
 func SelectUsers(c *gin.Context) {
 	// Query to select all users
@@ -23,7 +18,7 @@ func SelectUsers(c *gin.Context) {
 	rows, err := database.DB.Query(context.Background(), query)
 	if err != nil {
 		// Handle the error properly and respond with a 500 status code
-		c.JSON(500, gin.H{"error": fmt.Sprintf("Failed to fetch users: %v", err)})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to fetch users: %v", err)})
 		return
 	}
 	defer rows.Close()

@@ -26,6 +26,7 @@ func main() {
 
 	router.POST("/register", routes.RegisterUser)
 	router.GET("/getUsers", routes.SelectUsers)
+	router.GET("/getUserByEmail", routes.GetUserByEmail)
 	router.POST("/login", routes.LoginUser)
 	router.GET("/protected", auth.JWTMiddleware(), routes.ProtectedRoute)
 

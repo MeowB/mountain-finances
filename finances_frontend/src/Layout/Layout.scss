@@ -1,0 +1,17 @@
+.layout {
+	display: flex;
+
+	.gap {
+		flex-shrink: 0;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.layout {
+		margin-bottom: 74px;
+
+		.gap {
+			display: none;
+		}
+	}
+}

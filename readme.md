@@ -20,7 +20,9 @@ The **Personal Finance App** is a comprehensive financial management application
 	- pgx (PostgreSQL driver)
 	- JWT-go (for authentication)
 	- bcrypt (for password hashing)
-- **Frontend:** React, TypeScript  
+- **Frontend:** 
+	- React (Typescript)
+	- React router-dom (for routing)
 - **Database:** PostgreSQL  
 
 ## Roadmap  

@@ -12,6 +12,7 @@ const RegisterForm = ({ register, setRegister }: { register: boolean, setRegiste
 	const [errors, setErrors] = useState<Record<string, string>>({})
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+		setErrors({})
 		e.preventDefault();
 
 		const form = e.currentTarget;
@@ -26,7 +27,7 @@ const RegisterForm = ({ register, setRegister }: { register: boolean, setRegiste
 		if (!validateForm()) return
 
 		try {
-			const response = await fetch("http://localhost:8000/api/register/", {
+			const response = await fetch("/api/register", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

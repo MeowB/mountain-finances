@@ -14,7 +14,7 @@ const LoginPage = () => {
 					<img src={logo} alt="logo" />
 				</div>
 			</header>
-			<main>
+			<main className='login-page'>
 				<div className="left">
 					<img src={logo} alt="logo" />
 
