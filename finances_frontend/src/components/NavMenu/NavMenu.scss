@@ -23,8 +23,11 @@
 			border-radius: 0 12px 12px 0;
 			display: flex;
 			padding: 16px 0;
+			margin-top: 10px;
 			padding-left: 35px;
 			width: 90%;
+			white-space: nowrap;
+			border-left: 4px solid transparent;
 
 			a {
 				display: flex;
@@ -98,7 +101,7 @@
 
 	ul {
 		li {
-			padding-left: 19px;
+			padding-left: 14px;
 
 			img {
 				width: 12px;

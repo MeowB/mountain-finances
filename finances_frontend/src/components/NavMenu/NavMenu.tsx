@@ -64,7 +64,7 @@ const NavMenu = ({ isMinimized, setIsMinimized }: { isMinimized: boolean, setIsM
 							</svg>
 
 						</div>
-						<span>Recurring Bills </span>
+						<span>Recurring Bills</span>
 					</Link>
 				</li>
 			</ul>
