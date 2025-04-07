@@ -3,6 +3,7 @@ package main
 import (
 	"net/http" // requests
 
+	"backend/auth"
 	"backend/database"
 
 	"backend/routes"
@@ -25,6 +26,8 @@ func main() {
 
 	router.POST("/register", routes.RegisterUser)
 	router.GET("/getUsers", routes.SelectUsers)
+	router.POST("/login", routes.LoginUser)
+	router.GET("/protected", auth.JWTMiddleware(), routes.ProtectedRoute)
 
 	router.Run(":8000")
 }

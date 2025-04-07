@@ -18,7 +18,7 @@ The **Personal Finance App** is a comprehensive financial management application
 	- Golang
 	- GIN (for API management)
 	- pgx (PostgreSQL driver)
-	- JWT-go (for authentication).
+	- JWT-go (for authentication)
 	- bcrypt (for password hashing)
 - **Frontend:** React, TypeScript  
 - **Database:** PostgreSQL  
