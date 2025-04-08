@@ -1,5 +1,6 @@
 import { useState } from "react"
 import PasswordInput from "../PasswordInput/PasswordInput"
+import { Navigate } from "react-router-dom"
 
 
 const RegisterForm = ({ register, setRegister }: { register: boolean, setRegister: Function }) => {
@@ -41,6 +42,7 @@ const RegisterForm = ({ register, setRegister }: { register: boolean, setRegiste
 			}
 
 			alert("Registration successful!");
+			window.location.reload();
 			setFormData({ username: "", email: "", password: "", confirmPassword: "" }); // Reset form
 		} catch (error) {
 			alert(error);
@@ -50,21 +52,21 @@ const RegisterForm = ({ register, setRegister }: { register: boolean, setRegiste
 	const validateForm = () => {
 		let newErrors: Record<string, string> = {};
 
-		if (!/^[a-zA-Z0-9_]{3,20}$/.test(formData.username)) {
-			newErrors.username = "Username must be 3-20 characters (letters, numbers, underscores only)";
-		}
+		// if (!/^[a-zA-Z0-9_]{3,20}$/.test(formData.username)) {
+		// 	newErrors.username = "Username must be 3-20 characters (letters, numbers, underscores only)";
+		// }
 
-		if (!/^[\w-]+(\.[\w-]+)*@[\w-]+\.[a-zA-Z]{2,7}$/.test(formData.email)) {
-			newErrors.email = "Invalid email format";
-		}
+		// if (!/^[\w-]+(\.[\w-]+)*@[\w-]+\.[a-zA-Z]{2,7}$/.test(formData.email)) {
+		// 	newErrors.email = "Invalid email format";
+		// }
 
-		if (!/^(?=.*\d).{8,}$/.test(formData.password)) {
-			newErrors.password = "Password must be at least 8 characters and contain a number";
-		}
+		// if (!/^(?=.*\d).{8,}$/.test(formData.password)) {
+		// 	newErrors.password = "Password must be at least 8 characters and contain a number";
+		// }
 
-		if (formData.password !== formData.confirmPassword) {
-			newErrors.confirmPassword = "Passwords do not match";
-		}
+		// if (formData.password !== formData.confirmPassword) {
+		// 	newErrors.confirmPassword = "Passwords do not match";
+		// }
 
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0; // Return `true` if no errors

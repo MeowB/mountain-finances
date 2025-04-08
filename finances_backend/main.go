@@ -1,15 +1,18 @@
 package main
 
 import (
-	"net/http" // requests
-
 	"backend/auth"
 	"backend/database"
-
 	"backend/routes"
+	"net/http"
 
-	"github.com/gin-gonic/gin" // framework
+	"github.com/gin-gonic/gin"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 )
+
+// requests
+
+// framework
 
 func main() {
 

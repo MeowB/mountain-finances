@@ -1,0 +1,27 @@
+@use '../../styles/variables.scss' as vars;
+
+.summary {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 24px;
+	justify-content: space-between;
+	padding: 0 40px;
+
+	div:nth-child(1) {
+		background-color: vars.$c-grey-900;
+		color: vars.$c-white;
+	}
+
+	div {
+		@include vars.text-preset-4;
+		padding: 24px;
+		background-color: vars.$c-white;
+		border-radius: 12px;
+
+		.money {
+			@include vars.text-preset-1;
+			margin-top: 12px;
+		}
+	}
+}

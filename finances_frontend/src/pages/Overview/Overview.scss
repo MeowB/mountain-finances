@@ -1,0 +1,24 @@
+.overview-header {
+	padding: 40px;
+}
+
+.widgets {
+	display: grid;
+	gap: 24px;
+	grid-template-columns: repeat(12, 1fr);
+	padding: 40px;
+
+	.widget-1 {
+		grid-column-start: 1;
+		grid-column-end: 8;
+	}
+}
+
+
+
+@media screen and (max-width: 1144px ) {
+
+	.widgets {
+		grid-template-columns: 1fr;
+	}
+}

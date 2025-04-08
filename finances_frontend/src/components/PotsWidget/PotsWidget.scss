@@ -1,0 +1,87 @@
+@use '../../styles/variables.scss' as vars;
+
+.pots {
+	padding: 32px;
+	background-color: vars.$c-white;
+	border-radius: 12px;
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.bottom {
+		margin-top: 20px;
+		display: flex;
+
+		.left {
+
+			border-radius: 12px;
+			display: flex;
+			background-color: vars.$c-beige-100;
+			padding: 20px;
+			padding-right: 90px;
+			justify-content: center;
+			align-items: center;
+
+			.text {
+
+				padding-left: 16px;
+
+				p {
+					@include vars.text-preset-4
+				}
+
+				.money {
+					@include vars.text-preset-1
+				}
+
+			}
+		}
+
+		.right {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 1fr 1fr;
+			gap: 16px;
+			padding-left: 20px;
+			width: 100%;
+			.single-pot {
+				position: relative;
+				@include vars.text-preset-5;
+				padding-left: 16px;
+				border-radius: 8px;
+
+				.money {
+					@include vars.text-preset-4-bold
+				}
+			}
+
+			.left-line {
+				left: 0;
+				position: absolute;
+				width: 5px;
+				height: 100%;
+				border-radius: 8px;
+			}
+
+			.single-pot:nth-child(1) > .left-line {
+				background-color: vars.$c-green;
+
+			}
+			.single-pot:nth-child(2) > .left-line {
+				background-color: vars.$c-cyan;
+
+			}
+			.single-pot:nth-child(3) > .left-line {
+				background-color: vars.$c-navy;
+
+			}
+			.single-pot:nth-child(4) > .left-line  {
+				background-color: vars.$c-yellow;
+
+			}
+		}
+	}
+}
