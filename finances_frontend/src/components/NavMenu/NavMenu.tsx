@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 
 const NavMenu = ({ isMinimized, setIsMinimized }: { isMinimized: boolean, setIsMinimized: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const [isActive, setIsActive] = useState(0)
-	console.log(isActive)
 
 	return (
 		<nav className={`sidebar ${isMinimized ? 'minimized' : ''}`}>

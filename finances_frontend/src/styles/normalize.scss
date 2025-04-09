@@ -17,3 +17,28 @@ a {
 		color: inherit;
 	}
 }
+
+.modal {
+	background-color: rgba($color: #000000, $alpha: 0.5);
+	position: fixed;
+	width: 100%;
+	left: 0;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.content {
+	width: 100%;
+}
+
+button {
+	background-color: vars.$c-grey-900;
+	color: vars.$c-white;
+	padding: 16px;
+	border: none;
+	border-radius: 8px;
+	@include vars.text-preset-4-bold;
+	cursor: pointer;
+}

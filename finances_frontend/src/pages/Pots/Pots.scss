@@ -1,0 +1,12 @@
+@use '../../styles/variables.scss' as vars;
+
+.potsPage {
+	width: 100%;
+	.title {
+		padding: 40px;
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+
+	}
+}

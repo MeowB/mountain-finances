@@ -3,6 +3,7 @@
 
 .layout {
 	display: flex;
+	position: relative;
 
 	.gap {
 		flex-shrink: 0;

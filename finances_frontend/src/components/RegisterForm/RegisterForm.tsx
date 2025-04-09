@@ -45,7 +45,7 @@ const RegisterForm = ({ register, setRegister }: { register: boolean, setRegiste
 			window.location.reload();
 			setFormData({ username: "", email: "", password: "", confirmPassword: "" }); // Reset form
 		} catch (error) {
-			alert(error);
+			console.error(error)
 		}
 	};
 
