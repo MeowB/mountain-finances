@@ -13,6 +13,7 @@ var jwtKey []byte
 
 type Claims struct {
 	Username string `json:"username"`
+	UserID   int    `json:"user_id"`
 	jwt.StandardClaims
 }
 
@@ -31,12 +32,13 @@ func init() {
 
 }
 
-func GenerateJWT(username string) (string, error) {
+func GenerateJWT(username string, userID int) (string, error) {
 
 	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &Claims{
 		Username: username,
+		UserID:   userID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 			Issuer:    "mountain-finances",

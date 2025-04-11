@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import './ModalNewPot.scss'
 
-const ModalNewPot = () => {
+const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	const [bulletColor, setBulletColor] = useState<string>('green')
 	const [formData, setFormData] = useState({
-		potName: '',
-		targetValue: '',
-		color: ''
+		name: '',
+		target_amount: 0,
+		color: '',
+		total_saved: 0
 	})
 	const [errors, setErrors] = useState<Record<string, string>>({})
 
@@ -19,19 +20,24 @@ const ModalNewPot = () => {
 
 		const form = e.currentTarget
 		const newFormData = {
-			potName: (form.elements.namedItem('potName') as HTMLInputElement).value,
-			targetValue: (form.elements.namedItem('target') as HTMLInputElement).value,
-			color:  (form.elements.namedItem('theme') as HTMLInputElement).value
-		}
+		  name: (form.elements.namedItem('potName') as HTMLInputElement).value,
+		  target_amount: parseFloat((form.elements.namedItem('target') as HTMLInputElement).value),
+		  color: (form.elements.namedItem('theme') as HTMLInputElement).value,
+		  total_saved: 0,
+		};
+
 		setFormData(newFormData)
 
 		if (!validateForm(newFormData)) return
 
+		const token = localStorage.getItem("token")
+
 		try {
-			const response = await fetch('/api/addpot', {
+			const response = await fetch('/api/addPot', {
 				method: "POST",
 				headers: {
-					"Content-type": "application/json"
+					"Content-type": "application/json",
+					"Authorization": `Bearer ${token}`
 				},
 				body: JSON.stringify(newFormData)
 			})
@@ -47,6 +53,7 @@ const ModalNewPot = () => {
 			}
 
 			alert("Pot created successfully!")
+			setModalIsOpen(false)
 		} catch (error) {
 			console.error(error)
 			setErrors({ general: "An unexpected error occurred. Please try again later." })
@@ -56,11 +63,11 @@ const ModalNewPot = () => {
 	const validateForm = (data: typeof formData) => {
 		let newErrors: Record<string, string> = {}
 
-		if (data.potName.length === 0) {
+		if (data.name.length === 0) {
 			newErrors.potName = "You must provide a pot name"
 		}
 
-		if (data.targetValue.length === 0) {
+		if (data.target_amount === 0) {
 			newErrors.targetValue = "You must provide a target value"
 		}
 
@@ -83,10 +90,10 @@ const ModalNewPot = () => {
 					id="potName" 
 					placeholder="e.g. Rainy Days" 
 					maxLength={30} 
-					onChange={(e) => setFormData({ ...formData, potName: e.target.value })}
+					onChange={(e) => setFormData({ ...formData, name: e.target.value })}
 				/>
 				{errors.potName && <p className="error">{errors.potName}</p>}
-				<p>{30 - formData.potName.length} characters left</p>
+				<p>{30 - formData.name.length} characters left</p>
 
 				<div className="target">
 					<label htmlFor="target">Target</label>

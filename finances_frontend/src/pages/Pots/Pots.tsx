@@ -24,7 +24,7 @@ const Pots = () => {
 		<div className="potsPage">
 			{modalIsOpen && (
 				<div className="modal">
-					<ModalNewPot />
+					<ModalNewPot setModalIsOpen={setModalIsOpen} />
 				</div>
 			)}
 			<div className="title">

@@ -44,7 +44,7 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	token, err := auth.GenerateJWT(user.Email)
+	token, err := auth.GenerateJWT(user.Email, userID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Error generating token: %v", err)})
 		return
