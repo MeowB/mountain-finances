@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import NavMenu from "../components/NavMenu/NavMenu"
 import { useState } from "react"
 import './Layout.scss'
+import { TabProvider } from "../context/TabContext"
 
 const Layout = () => {
 	let [isMinimized, setIsMinimized] = useState(false)
@@ -10,13 +11,15 @@ const Layout = () => {
 	return (
 		<main>
 			<div className="layout">
-				<NavMenu isMinimized={isMinimized} setIsMinimized={setIsMinimized} />
-				<div className="gap" style={{ width: width }}></div>
+				<TabProvider>
+					<NavMenu isMinimized={isMinimized} setIsMinimized={setIsMinimized} />
+					<div className="gap" style={{ width: width }}></div>
 
 
-				<div className="content">
-					<Outlet />
-				</div>
+					<div className="content">
+						<Outlet />
+					</div>
+				</TabProvider>
 			</div>
 		</main>
 	)

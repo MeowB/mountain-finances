@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom"
 import greenMoneyBag from '../../assets/greenMoneyBag.svg'
 import './PotsWidget.scss'
+import { useTab } from '../../context/TabContext'
 
 const PotsWidget = () => {
+	const { setActiveTab } = useTab()
+
 	return (
 		<div className="pots">
 			<div className="top">
 				<h2>Pots</h2>
-				<Link to='/pots'>See Details ►</Link>
+				<Link to='/pots' onClick={() => setActiveTab(3)}>See Details ►</Link>
 			</div>
 			<div className="bottom">
 				<div className="left">

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import PasswordInput from "../PasswordInput/PasswordInput"
-import { Navigate } from "react-router-dom"
 
 
 const RegisterForm = ({ register, setRegister }: { register: boolean, setRegister: Function }) => {
