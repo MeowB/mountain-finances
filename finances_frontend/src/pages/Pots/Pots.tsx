@@ -5,6 +5,9 @@ import './Pots.scss'
 
 const Pots = () => {
 	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+	const [pots, setPots] = useState<any[]>([])
+	const [loading, setLoading] = useState<boolean>(true)
+	const [error, setError] = useState<string | null>(null)
 
 	const handleClickOutside = (event: MouseEvent) => {
 		const modalElement = document.querySelector(".modalNewPot");
@@ -20,6 +23,35 @@ const Pots = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		const fetchPots = async () => {
+			const token = localStorage.getItem("token")
+			try {
+				const response = await fetch('/api/getPots', {
+					method: "GET",
+					headers: {
+						"Content-type": "application/json",
+						"Authorization": `Bearer ${token}`
+					}
+				})
+
+				const data = await response.json()
+				if (!response.ok) {
+					throw new Error(data.message || "Something went wrong")
+				}
+
+				setPots(data)
+				setLoading(false)
+			} catch (error) {
+				console.error(error)
+				setError("An unexpected error occurred. Please try again later.")
+				setLoading(false)
+			}
+		}
+
+		fetchPots()
+	}, [])
+
 	return (
 		<div className="potsPage">
 			{modalIsOpen && (
@@ -32,6 +64,19 @@ const Pots = () => {
 				<button onClick={() => setModalIsOpen(!modalIsOpen)}>+ Add New Pot</button>
 			</div>
 
+			{loading && <p>Loading...</p>}
+			{error && <p>{error}</p>}
+			{!loading && !error && (
+				<div className="potsList">
+					{pots.map(pot => (
+						<div key={pot.id} className="potItem">
+							<p className="potName">{pot.name}</p>
+							<p className="potAmount">${pot.total_saved}</p>
+							<div className="potColor" style={{ backgroundColor: pot.color }}></div>
+						</div>
+					))}
+				</div>
+			)}
 		</div>
 	)
 }

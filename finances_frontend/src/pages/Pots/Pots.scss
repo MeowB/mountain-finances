@@ -7,6 +7,30 @@
 		display: flex;
 		width: 100%;
 		justify-content: space-between;
-
+	}
+	.potsList {
+		padding: 20px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+	.potItem {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px;
+		border: 1px solid vars.$c-grey-300;
+		border-radius: 8px;
+	}
+	.potName {
+		@include vars.text-preset-4;
+	}
+	.potAmount {
+		@include vars.text-preset-4-bold;
+	}
+	.potColor {
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
 	}
 }
