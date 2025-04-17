@@ -109,6 +109,17 @@
 			border-radius: 8px;
 			margin-top: 20px;
 			cursor: pointer;
+			margin-bottom: 10px;
+		}
+
+		button {
+			@include vars.text-preset-4-bold;
+			background-color: vars.$c-red;
+			color: vars.$c-white;
+			border: none;
+			border-radius: 8px;
+			margin-top: 10px;
+			cursor: pointer;
 		}
 	}
 }

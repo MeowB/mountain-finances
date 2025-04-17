@@ -9,13 +9,45 @@ const Pots = () => {
 	const [pots, setPots] = useState<any[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
+	const [selectedPot, setSelectedPot] = useState<any | null>(null)
 
 	const handleClickOutside = (event: MouseEvent) => {
 		const modalElement = document.querySelector(".modalNewPot");
 		if (modalElement && !modalElement.contains(event.target as Node)) {
 			setModalIsOpen(false);
+			setSelectedPot(null);
 		}
 	};
+
+	const handleEdit = (pot: any) => {
+		setSelectedPot(pot);
+		setModalIsOpen(true);
+	};
+
+	const handleDelete = async (potId: string) => {
+		const token = localStorage.getItem("token")
+
+		try {
+			const response = await fetch(`/api/deletePot/${potId}`, {
+				method: "DELETE",
+				headers: {
+					"Content-type": "application/json",
+					"Authorization": `Bearer ${token}`
+				}
+			})
+
+			const data = await response.json()
+			if (!response.ok) {
+				throw new Error(data.message || "Something went wrong")
+			}
+
+			alert("Pot deleted successfully!")
+			setPots(pots.filter(pot => pot.id !== potId))
+		} catch (error) {
+			console.error(error)
+			setError("An unexpected error occurred. Please try again later.")
+		}
+	}
 
 	useEffect(() => {
 		document.addEventListener("mousedown", handleClickOutside);
@@ -58,7 +90,7 @@ const Pots = () => {
 		<div className="potsPage">
 			{modalIsOpen && (
 				<div className="modal">
-					<ModalNewPot setModalIsOpen={setModalIsOpen} />
+					<ModalNewPot setModalIsOpen={setModalIsOpen} potData={selectedPot} isEditMode={!!selectedPot} />
 				</div>
 			)}
 			<div className="title">
@@ -78,7 +110,7 @@ const Pots = () => {
 									<p className="potName">{pot.name}</p>
 								</div>
 								<div className="options">
-									<img src={optionDot} alt="" />
+									<img src={optionDot} alt="" onClick={() => handleEdit(pot)} />
 								</div>
 							</div>
 							<div className="content">
@@ -100,6 +132,8 @@ const Pots = () => {
 							<div className="buttons">
 								<button>+ Add Money</button>
 								<button>Withdraw</button>
+								<button onClick={() => handleEdit(pot)}>Edit</button>
+								<button onClick={() => handleDelete(pot.id)}>Delete</button>
 							</div>
 						</div>
 					))}

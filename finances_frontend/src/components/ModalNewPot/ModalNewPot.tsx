@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './ModalNewPot.scss'
 
-const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const ModalNewPot = ({ setModalIsOpen, potData, isEditMode }: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>, potData?: any, isEditMode: boolean }) => {
 	const [bulletColor, setBulletColor] = useState<string>('green')
 	const [formData, setFormData] = useState({
 		name: '',
@@ -10,6 +10,18 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 		total_saved: 0
 	})
 	const [errors, setErrors] = useState<Record<string, string>>({})
+
+	useEffect(() => {
+		if (isEditMode && potData) {
+			setFormData({
+				name: potData.name,
+				target_amount: potData.target_amount,
+				color: potData.color,
+				total_saved: potData.total_saved
+			})
+			setBulletColor(potData.color)
+		}
+	}, [isEditMode, potData])
 
 	const handleColorChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		setBulletColor(e.target.value)
@@ -23,7 +35,7 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 		  name: (form.elements.namedItem('potName') as HTMLInputElement).value,
 		  target_amount: parseFloat((form.elements.namedItem('target') as HTMLInputElement).value),
 		  color: (form.elements.namedItem('theme') as HTMLInputElement).value,
-		  total_saved: 0,
+		  total_saved: formData.total_saved,
 		};
 
 		setFormData(newFormData)
@@ -33,8 +45,8 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 		const token = localStorage.getItem("token")
 
 		try {
-			const response = await fetch('/api/addPot', {
-				method: "POST",
+			const response = await fetch(isEditMode ? `/api/editPot/${potData.id}` : '/api/addPot', {
+				method: isEditMode ? "PUT" : "POST",
 				headers: {
 					"Content-type": "application/json",
 					"Authorization": `Bearer ${token}`
@@ -52,7 +64,7 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 				return
 			}
 
-			alert("Pot created successfully!")
+			alert(isEditMode ? "Pot updated successfully!" : "Pot created successfully!")
 			setModalIsOpen(false)
 		} catch (error) {
 			console.error(error)
@@ -76,9 +88,34 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 		return Object.keys(newErrors).length === 0
 	}
 
+	const handleDelete = async () => {
+		const token = localStorage.getItem("token")
+
+		try {
+			const response = await fetch(`/api/deletePot/${potData.id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-type": "application/json",
+					"Authorization": `Bearer ${token}`
+				}
+			})
+
+			const data = await response.json()
+			if (!response.ok) {
+				throw new Error(data.message || "Something went wrong")
+			}
+
+			alert("Pot deleted successfully!")
+			setModalIsOpen(false)
+		} catch (error) {
+			console.error(error)
+			setErrors({ general: "An unexpected error occurred. Please try again later." })
+		}
+	}
+
 	return (
 		<div className="modalNewPot">
-			<h3>Add New Pot</h3>
+			<h3>{isEditMode ? "Edit Pot" : "Add New Pot"}</h3>
 			<p>Create a pot to set savings targets. These can help keep you on track as you save for special purchases.</p>
 
 			<form action="POST" onSubmit={(e) => handleSubmit(e)}>
@@ -90,6 +127,7 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 					id="potName" 
 					placeholder="e.g. Rainy Days" 
 					maxLength={30} 
+					value={formData.name}
 					onChange={(e) => setFormData({ ...formData, name: e.target.value })}
 				/>
 				{errors.potName && <p className="error">{errors.potName}</p>}
@@ -97,13 +135,21 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 
 				<div className="target">
 					<label htmlFor="target">Target</label>
-					<input className={errors.targetValue ? 'red-border' : ''} type="text" name="target" id="target" placeholder="e.g. 2000" />
+					<input 
+						className={errors.targetValue ? 'red-border' : ''} 
+						type="text" 
+						name="target" 
+						id="target" 
+						placeholder="e.g. 2000" 
+						value={formData.target_amount}
+						onChange={(e) => setFormData({ ...formData, target_amount: parseFloat(e.target.value) })}
+					/>
 					{errors.targetValue && <p className="error">{errors.targetValue}</p>}
 					<p className='dollarPrepend'>$</p>
 				</div>
 				<label htmlFor="theme">Theme</label>
 				<div className="selectColor">
-					<select name="theme" id="theme" onChange={(e) => handleColorChange(e)}>
+					<select name="theme" id="theme" value={formData.color} onChange={(e) => handleColorChange(e)}>
 						<option value="green">Green</option>
 						<option value="yellow">Yellow</option>
 						<option value="cyan">Cyan</option>
@@ -115,7 +161,8 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 				</div>
 
 				{errors.general && <p className="error">{errors.general}</p>}
-				<input type="submit" value="Add pot" />
+				<input type="submit" value={isEditMode ? "Update Pot" : "Add Pot"} />
+				{isEditMode && <button type="button" onClick={handleDelete}>Delete Pot</button>}
 			</form>
 		</div>
 	)

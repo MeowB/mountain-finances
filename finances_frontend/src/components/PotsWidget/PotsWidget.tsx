@@ -3,7 +3,7 @@ import greenMoneyBag from '../../assets/greenMoneyBag.svg'
 import './PotsWidget.scss'
 import { useTab } from '../../context/TabContext'
 
-const PotsWidget = () => {
+const PotsWidget = ({ pots, onEdit, onDelete }) => {
 	const { setActiveTab } = useTab()
 
 	return (
@@ -24,26 +24,15 @@ const PotsWidget = () => {
 
 				</div>
 				<div className="right">
-					<div className="single-pot">
-						<div className="left-line"></div>
-						<p>Savings</p>
-						<p className="money">$159</p>
-					</div>
-					<div className="single-pot">
-						<div className="left-line"></div>
-						<p>Gift</p>
-						<p className="money">$40</p>
-					</div>
-					<div className="single-pot">
-						<div className="left-line"></div>
-						<p>Concert Tickets</p>
-						<p className="money">$110</p>
-					</div>
-					<div className="single-pot">
-						<div className="left-line"></div>
-						<p>New Laptop</p>
-						<p className="money">$10</p>
-					</div>
+						{pots.map(pot => (
+							<div key={pot.id} className="single-pot">
+								<div className="left-line"></div>
+								<p>{pot.name}</p>
+								<p className="money">${pot.total_saved}</p>
+								<button onClick={() => onEdit(pot)}>Edit</button>
+								<button onClick={() => onDelete(pot.id)}>Delete</button>
+							</div>
+						))}
 				</div>
 			</div>
 		</div>
