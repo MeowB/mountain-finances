@@ -108,3 +108,13 @@
 
 	}
 }
+
+@media screen and (max-width: 1144px) {
+
+	.potsPage {
+		.potsList {
+			grid-template-columns: 1fr;
+		}
+	}
+
+}
