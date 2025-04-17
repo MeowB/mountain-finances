@@ -9,6 +9,8 @@ const Pots = () => {
 	const [pots, setPots] = useState<any[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
+	const [tooltipVisible, setTooltipVisible] = useState<boolean>(false)
+	const [selectedPot, setSelectedPot] = useState<any>(null)
 
 	const handleClickOutside = (event: MouseEvent) => {
 		const modalElement = document.querySelector(".modalNewPot");
@@ -54,6 +56,21 @@ const Pots = () => {
 		fetchPots()
 	}, [])
 
+	const toggleTooltip = (pot: any) => {
+		setTooltipVisible(!tooltipVisible)
+		setSelectedPot(pot)
+	}
+
+	const handleEditPot = () => {
+		// Implement edit pot functionality
+		console.log("Edit pot:", selectedPot)
+	}
+
+	const handleDeletePot = () => {
+		// Implement delete pot functionality
+		console.log("Delete pot:", selectedPot)
+	}
+
 	return (
 		<div className="potsPage">
 			{modalIsOpen && (
@@ -77,7 +94,7 @@ const Pots = () => {
 									<div className={`potColor ${pot.color}`}></div>
 									<p className="potName">{pot.name}</p>
 								</div>
-								<div className="options">
+								<div className="options" onClick={() => toggleTooltip(pot)}>
 									<img src={optionDot} alt="" />
 								</div>
 							</div>
@@ -101,6 +118,15 @@ const Pots = () => {
 								<button>+ Add Money</button>
 								<button>Withdraw</button>
 							</div>
+							{tooltipVisible && selectedPot === pot && (
+								<div className="tooltip">
+									<div className="tooltip-arrow"></div>
+									<div className="tooltip-options">
+										<button onClick={handleEditPot}>Edit</button>
+										<button onClick={handleDeletePot}>Delete</button>
+									</div>
+								</div>
+							)}
 						</div>
 					))}
 				</div>
