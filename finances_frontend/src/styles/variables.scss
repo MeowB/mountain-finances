@@ -17,6 +17,31 @@ $c-navy: #626070;
 $c-red: #c94736;
 $c-purple-secondary: #826cb0;
 
+// CSS classes for secondary colors
+.green {
+	background-color: $c-green;
+}
+
+.yellow {
+	background-color: $c-yellow;
+}
+
+.cyan {
+	background-color: $c-cyan;
+}
+
+.navy {
+	background-color: $c-navy;
+}
+
+.red {
+	background-color: $c-red;
+}
+
+.purple {
+	background-color: $c-purple-secondary;
+}
+
 // others
 $c-purple-other: #af81ba;
 $c-turquoise: #597c7c;
@@ -28,6 +53,7 @@ $c-army-green: #7f9161;
 $c-gold: #cab361;
 $c-orange: #be6c49;
 $c-white: #fff;
+
 
 @mixin text-preset-1 {
 	font-size: 32px;

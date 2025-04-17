@@ -2,35 +2,109 @@
 
 .potsPage {
 	width: 100%;
+
 	.title {
 		padding: 40px;
 		display: flex;
 		width: 100%;
 		justify-content: space-between;
 	}
+
 	.potsList {
 		padding: 20px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-	.potItem {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		padding: 10px;
-		border: 1px solid vars.$c-grey-300;
-		border-radius: 8px;
-	}
-	.potName {
-		@include vars.text-preset-4;
-	}
-	.potAmount {
-		@include vars.text-preset-4-bold;
-	}
-	.potColor {
-		width: 20px;
-		height: 20px;
-		border-radius: 50%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+
+		.potItem {
+			background-color: vars.$c-white;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			padding: 24px;
+			border-radius: 8px;
+
+			.title {
+				padding: 0px;
+				@include vars.text-preset-2;
+
+				.text {
+					display: flex;
+					align-items: center;
+					gap: 16px;
+				}
+
+				.potColor {
+					width: 16px;
+					height: 16px;
+					border-radius: 50%;
+				}
+
+				.potName {
+					@include vars.text-preset-4;
+				}
+
+				.options {
+					cursor: pointer;
+				}
+
+			}
+
+			.content {
+				margin-top: 42px;
+				display: flex;
+				justify-content: space-between;
+				flex-direction: column;
+
+				.text {
+					display: flex;
+					justify-content: space-between;
+					@include vars.text-preset-4;
+
+				}
+
+				.potAmount {
+					@include vars.text-preset-1;
+				}
+
+				.progress {
+					width: 100%;
+
+					.progressBar {
+						background-color: vars.$c-beige-100;
+						margin-top: 16px;
+						border-radius: 4px;
+
+						.bar {
+							height: 8px;
+							border-radius: 4px;
+							max-width: 100%;
+						}
+					}
+				}
+
+				.text:nth-child(2) {
+					margin-top: 13px;
+				}
+
+			}
+
+			.buttons {
+				margin-top: 32px;
+				width: 100%;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 16px;
+
+				button {
+					background-color: vars.$c-beige-100;
+					color: black;
+				}
+			}
+
+		}
+
+
 	}
 }

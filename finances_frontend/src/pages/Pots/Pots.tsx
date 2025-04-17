@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import ModalNewPot from "../../components/ModalNewPot/ModalNewPot"
 import './Pots.scss'
+import optionDot from '../../assets/option-dot.png'
 
 
 const Pots = () => {
@@ -36,6 +37,7 @@ const Pots = () => {
 				})
 
 				const data = await response.json()
+				console.log(data)
 				if (!response.ok) {
 					throw new Error(data.message || "Something went wrong")
 				}
@@ -70,9 +72,35 @@ const Pots = () => {
 				<div className="potsList">
 					{pots.map(pot => (
 						<div key={pot.id} className="potItem">
-							<p className="potName">{pot.name}</p>
-							<p className="potAmount">${pot.total_saved}</p>
-							<div className="potColor" style={{ backgroundColor: pot.color }}></div>
+							<div className="title">
+								<div className="text">
+									<div className={`potColor ${pot.color}`}></div>
+									<p className="potName">{pot.name}</p>
+								</div>
+								<div className="options">
+									<img src={optionDot} alt="" />
+								</div>
+							</div>
+							<div className="content">
+								<div className="text">
+									<p>Total Saved</p>
+									<p className="potAmount">${pot.total_saved}</p>
+
+								</div>
+								<div className="progress">
+									<div className="progressBar">
+										<div className={`bar ${pot.color}`} style={{ width: `${(pot.total_saved / pot.target_amount) * 100}%` }}></div>
+									</div>
+									<div className="text">
+										<p>${((pot.total_saved / pot.target_amount) * 100).toFixed(2)}%</p>
+										<p>Target of ${pot.target_amount}</p>
+									</div>
+								</div>
+							</div>
+							<div className="buttons">
+								<button>+ Add Money</button>
+								<button>Withdraw</button>
+							</div>
 						</div>
 					))}
 				</div>
