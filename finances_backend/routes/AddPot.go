@@ -10,15 +10,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Pot struct {
-	ID           int     `json:"id"`
-	Name         string  `json:"name"`
-	TotalSaved   float64 `json:"total_saved"`
-	TargetAmount float64 `json:"target_amount"`
-	Color        string  `json:"color"`
-}
-
 func AddPot(c *gin.Context) {
+
+	type Pot struct {
+		ID           int     `json:"id"`
+		Name         string  `json:"name"`
+		TotalSaved   float64 `json:"total_saved"`
+		TargetAmount float64 `json:"target_amount"`
+		Color        string  `json:"color"`
+	}
 
 	var pot Pot
 	userID, exists := c.Get("userID")

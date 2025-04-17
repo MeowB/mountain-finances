@@ -37,6 +37,7 @@ func main() {
 	router.POST("/login", routes.LoginUser)
 	router.GET("/protected", middleware.JWTMiddleware(), routes.ProtectedRoute)
 	router.POST("/addPot", routes.AddPot)
+	router.GET("getPots", routes.GetPots)
 
 	router.GET("/ping", func(c *gin.Context) {
 		userID, exists := c.Get("userID")
