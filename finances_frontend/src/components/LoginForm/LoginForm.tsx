@@ -1,6 +1,6 @@
 import { useState } from "react"
 import PasswordInput from "../PasswordInput/PasswordInput"
-import { useNavigate } from "react-router"
+import { useNavigate } from "react-router-dom"
 
 
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import ModalNewPot from "../../components/ModalNewPot/ModalNewPot"
 import './Pots.scss'
+import { Link } from 'react-router-dom'
 
 
 const Pots = () => {
