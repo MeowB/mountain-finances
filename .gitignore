@@ -74,3 +74,12 @@ pnpm-debug.log*
 *.iml
 *.sublime-workspace
 *.sublime-project
+
+# Temporary files/folders
+tmp/
+*.tmp
+*.temp
+*.bak
+*.old
+*.swp
+*.swo
