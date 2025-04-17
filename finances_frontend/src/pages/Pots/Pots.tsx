@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react"
 import ModalNewPot from "../../components/ModalNewPot/ModalNewPot"
+import ModalEditPot from "../../components/ModalEditPot/ModalEditPot"
+import ModalDeletePot from "../../components/ModalDeletePot/ModalDeletePot"
+import TooltipMenu from "../../components/TooltipMenu/TooltipMenu"
 import './Pots.scss'
 import optionDot from '../../assets/option-dot.png'
 
 
 const Pots = () => {
 	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+	const [editModalIsOpen, setEditModalIsOpen] = useState<boolean>(false)
+	const [deleteModalIsOpen, setDeleteModalIsOpen] = useState<boolean>(false)
+	const [selectedPot, setSelectedPot] = useState<any>(null)
 	const [pots, setPots] = useState<any[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
@@ -54,11 +60,53 @@ const Pots = () => {
 		fetchPots()
 	}, [])
 
+	const handleEdit = (potData: any) => {
+		setSelectedPot(potData);
+		setEditModalIsOpen(true);
+	};
+
+	const handleDelete = (potData: any) => {
+		setSelectedPot(potData);
+		setDeleteModalIsOpen(true);
+	};
+
+	const handleDeleteConfirm = async (id: number) => {
+		const token = localStorage.getItem("token");
+		try {
+			const response = await fetch(`/api/deletePot/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-type": "application/json",
+					"Authorization": `Bearer ${token}`
+				}
+			});
+
+			if (!response.ok) {
+				throw new Error("Failed to delete pot");
+			}
+
+			setPots(pots.filter(pot => pot.id !== id));
+		} catch (error) {
+			console.error(error);
+			setError("An unexpected error occurred. Please try again later.");
+		}
+	};
+
 	return (
 		<div className="potsPage">
 			{modalIsOpen && (
 				<div className="modal">
 					<ModalNewPot setModalIsOpen={setModalIsOpen} />
+				</div>
+			)}
+			 {editModalIsOpen && selectedPot && (
+				<div className="modal">
+					<ModalEditPot setModalIsOpen={setEditModalIsOpen} potData={selectedPot} />
+				</div>
+			)}
+			{deleteModalIsOpen && selectedPot && (
+				<div className="modal">
+					<ModalDeletePot setModalIsOpen={setDeleteModalIsOpen} potData={selectedPot} handleDelete={handleDeleteConfirm} />
 				</div>
 			)}
 			<div className="title">
@@ -78,7 +126,7 @@ const Pots = () => {
 									<p className="potName">{pot.name}</p>
 								</div>
 								<div className="options">
-									<img src={optionDot} alt="" />
+									<TooltipMenu potData={pot} onEdit={handleEdit} onDelete={handleDelete} />
 								</div>
 							</div>
 							<div className="content">
