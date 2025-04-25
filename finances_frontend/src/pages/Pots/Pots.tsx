@@ -5,7 +5,7 @@ import optionDot from '../../assets/option-dot.png'
 
 
 const Pots = () => {
-	const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+	const [modalNewPotIsOpen, setmodalNewPotIsOpen] = useState<boolean>(false)
 	const [pots, setPots] = useState<any[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
@@ -13,7 +13,7 @@ const Pots = () => {
 	const handleClickOutside = (event: MouseEvent) => {
 		const modalElement = document.querySelector(".modalNewPot");
 		if (modalElement && !modalElement.contains(event.target as Node)) {
-			setModalIsOpen(false);
+			setmodalNewPotIsOpen(false);
 		}
 	};
 
@@ -52,18 +52,18 @@ const Pots = () => {
 		}
 
 		fetchPots()
-	}, [])
+	}, [modalNewPotIsOpen])
 
 	return (
 		<div className="potsPage">
-			{modalIsOpen && (
+			{modalNewPotIsOpen && (
 				<div className="modal">
-					<ModalNewPot setModalIsOpen={setModalIsOpen} />
+					<ModalNewPot setmodalNewPotIsOpen={setmodalNewPotIsOpen} />
 				</div>
 			)}
 			<div className="title">
 				<h1>Pots</h1>
-				<button onClick={() => setModalIsOpen(!modalIsOpen)}>+ Add New Pot</button>
+				<button onClick={() => setmodalNewPotIsOpen(!modalNewPotIsOpen)}>+ Add New Pot</button>
 			</div>
 
 			{loading && <p>Loading...</p>}

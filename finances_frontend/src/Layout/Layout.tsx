@@ -3,6 +3,8 @@ import NavMenu from "../components/NavMenu/NavMenu"
 import { useState } from "react"
 import './Layout.scss'
 import { TabProvider } from "../context/TabContext"
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layout = () => {
 	let [isMinimized, setIsMinimized] = useState(false)
@@ -17,6 +19,7 @@ const Layout = () => {
 
 
 					<div className="content">
+						<ToastContainer />
 						<Outlet />
 					</div>
 				</TabProvider>

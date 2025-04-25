@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import './ModalNewPot.scss'
+// import { useNavigate } from 'react-router-dom'
+// import { toast } from 'react-toastify'
 
-const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const ModalNewPot = ({ setmodalNewPotIsOpen }: { setmodalNewPotIsOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+	// let navigate = useNavigate()
 	const [bulletColor, setBulletColor] = useState<string>('green')
 	const [formData, setFormData] = useState({
 		name: '',
@@ -52,8 +55,8 @@ const ModalNewPot = ({ setModalIsOpen }: { setModalIsOpen: React.Dispatch<React.
 				return
 			}
 
-			alert("Pot created successfully!")
-			setModalIsOpen(false)
+			// navigate(0)
+			setmodalNewPotIsOpen(false)
 		} catch (error) {
 			console.error(error)
 			setErrors({ general: "An unexpected error occurred. Please try again later." })
