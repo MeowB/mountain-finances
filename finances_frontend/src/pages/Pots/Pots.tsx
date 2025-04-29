@@ -1,21 +1,43 @@
 import { useState, useEffect } from "react"
 import ModalNewPot from "../../components/ModalNewPot/ModalNewPot"
+import ModalEditPot from "../../components/ModalEditPot/ModalEditPot"
 import './Pots.scss'
-import optionDot from '../../assets/option-dot.png'
+import ModalDeletePot from "../../components/ModalDeletePot/ModalDeletePot"
 
 
 const Pots = () => {
 	const [modalNewPotIsOpen, setmodalNewPotIsOpen] = useState<boolean>(false)
+	const [modalEditPotisOpen, setModalEditPotIsOpen] = useState<boolean>(false)
+	const [modalDeletePotisOpen, setModalDeletePotIsOpen] = useState<boolean>(false)
 	const [pots, setPots] = useState<any[]>([])
+	const [selectedPot, setSelectedPot] = useState<any | null>(null)
 	const [loading, setLoading] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
+	const [openTooltipId, setOpenTooltipId] = useState<number | null>(null)
 
 	const handleClickOutside = (event: MouseEvent) => {
-		const modalElement = document.querySelector(".modalNewPot");
-		if (modalElement && !modalElement.contains(event.target as Node)) {
+		const modalNewElement = document.querySelector(".modalNewPot");
+		const modalEditElement = document.querySelector(".modalEditPot");
+		const modalDeleteElement = document.querySelector(".modalDeletePot")
+		const tooltip = document.querySelector('.tooltip-box')
+
+		if (modalDeleteElement && !modalDeleteElement.contains(event.target as Node)) {
+			setModalDeletePotIsOpen(false)
+		}
+		if (modalNewElement && !modalNewElement.contains(event.target as Node)) {
 			setmodalNewPotIsOpen(false);
 		}
+		if (modalEditElement && !modalEditElement.contains(event.target as Node)) {
+			setModalEditPotIsOpen(false);
+		}
+		if (tooltip && !tooltip.contains(event.target as Node)) {
+			setOpenTooltipId(0)
+		}
 	};
+
+	const handlePotSelection = (pot: any) => {
+		setSelectedPot(pot)
+	}
 
 	useEffect(() => {
 		document.addEventListener("mousedown", handleClickOutside);
@@ -54,6 +76,10 @@ const Pots = () => {
 		fetchPots()
 	}, [modalNewPotIsOpen])
 
+	const toggleTooltip = (id: number) => {
+		setOpenTooltipId(prev => (prev === id ? null : id))
+	}
+
 	return (
 		<div className="potsPage">
 			{modalNewPotIsOpen && (
@@ -61,6 +87,19 @@ const Pots = () => {
 					<ModalNewPot setmodalNewPotIsOpen={setmodalNewPotIsOpen} />
 				</div>
 			)}
+
+			{modalEditPotisOpen && (
+				<div className="modal">
+					<ModalEditPot pot={selectedPot} setModalEditPotIsOpen={setModalEditPotIsOpen} />
+				</div>
+			)}
+
+			{modalDeletePotisOpen && (
+				<div className="modal">
+					<ModalDeletePot name={selectedPot.name} id={selectedPot.id} setModalDeleteIsOpen={setModalDeletePotIsOpen} /> 
+				</div>
+			)}
+
 			<div className="title">
 				<h1>Pots</h1>
 				<button onClick={() => setmodalNewPotIsOpen(!modalNewPotIsOpen)}>+ Add New Pot</button>
@@ -78,7 +117,22 @@ const Pots = () => {
 									<p className="potName">{pot.name}</p>
 								</div>
 								<div className="options">
-									<img src={optionDot} alt="" />
+									<span onClick={() => toggleTooltip(pot.id)}>...
+									</span>
+									{openTooltipId === pot.id && (
+										<div className="tooltip-box">
+											<a onClick={() => {
+												handlePotSelection(pot);
+												setOpenTooltipId(0);
+												setModalEditPotIsOpen(!modalEditPotisOpen);
+											}}>Edit Pot</a>
+											<a onClick={() => {
+												handlePotSelection(pot);
+												setOpenTooltipId(0);
+												setModalDeletePotIsOpen(!modalDeletePotisOpen)
+											}}>Delete Pot</a>
+										</div>
+									)}
 								</div>
 							</div>
 							<div className="content">

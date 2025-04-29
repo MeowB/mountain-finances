@@ -1,0 +1,119 @@
+@use '../../styles/variables.scss' as vars;
+
+.modalEditPot {
+	width: 100%;
+	max-width: 560px;
+	min-width: 335px;
+	padding: 32px;
+	background-color: vars.$c-white;
+	max-width: 560px;
+	border-radius: 12px;
+
+	.error {
+		color: red;
+	}
+
+	h3 {
+		@include vars.text-preset-1;
+	}
+
+	p:nth-child(2) {
+		@include vars.text-preset-4;
+		padding-top: 20px;
+	}
+
+	form {
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		min-width: 335px;
+		
+
+		p {
+			text-align: right;
+			@include vars.text-preset-5;
+		}
+
+		label {
+			@include vars.text-preset-5-bold;
+			margin-top: 16px;
+		}
+
+		input,
+		select {
+			padding: 12px;
+		}
+
+		.selectColor {
+			position: relative;
+			width: 100%;
+
+			select {
+				width: 100%;
+				padding-left: 32px;
+			}
+
+			.bullet {
+				position: absolute;
+				top: 14px;
+				left: 12px;
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+			}
+
+			.green {
+				background-color: #277c78;
+			}
+
+			.yellow {
+				background-color: #f2cdac;
+			}
+
+			.cyan {
+				background-color: #82c9d7;
+			}
+
+			.navy {
+				background-color: #626070;
+			}
+
+			.red {
+				background-color: #c94736;
+			}
+
+			.purple {
+				background-color: #826cb0;
+			}
+		}
+
+		.target {
+			display: flex;
+			flex-direction: column;
+			position: relative;
+
+			#target {
+				padding-left: 32px;
+			}
+
+			.dollarPrepend {
+				@include vars.text-preset-4;
+				color: vars.$c-beige-500;
+				text-align: left;
+				position: absolute;
+				left: 15px;
+				top: 45px;
+			}
+		}
+
+		button[type=submit] {
+			@include vars.text-preset-4-bold;
+			background-color: vars.$c-grey-900;
+			color: vars.$c-white;
+			border: none;
+			border-radius: 8px;
+			margin-top: 20px;
+			cursor: pointer;
+		}
+	}
+}

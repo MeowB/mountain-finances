@@ -1,0 +1,35 @@
+@use '../../styles/variables.scss' as vars;
+
+.modalDeletePot {
+	width: 100%;
+	max-width: 560px;
+	min-width: 335px;
+	padding: 32px;
+	background-color: vars.$c-white;
+	border-radius: 12px;
+
+
+	display: flex;
+	flex-direction: column;
+
+	h3 {
+		@include vars.text-preset-1;
+	}
+
+	p {
+		margin-top: 20px;
+		@include vars.text-preset-4;
+	}
+
+	button {
+		margin-top: 20px;
+		background-color: transparent;
+		color: vars.$c-grey-500;
+		@include vars.text-preset-4;
+	}
+ 
+	.deleteButton{
+		color: white;
+		background-color: red;
+	}
+}

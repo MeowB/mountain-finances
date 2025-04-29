@@ -45,10 +45,39 @@
 					@include vars.text-preset-4;
 				}
 
-				.options {
+				span {
 					cursor: pointer;
+					padding: 5px;
 				}
 
+			}
+
+			.tooltip-box {
+				position: absolute;
+				right: 50px;
+				background-color: vars.$c-white;
+				box-shadow: 0 4px 4px rgba($color: #000000, $alpha: 0.25);
+				border-radius: 8px;
+				display: flex;
+				gap: 12px;
+				flex-direction: column;
+				font-weight: 400;
+				@include vars.text-preset-4;
+				padding: 12px 20px;
+
+				a {
+					cursor: pointer;
+				padding: 12px 20px;
+				}
+
+				a:nth-child(1) {
+					border-bottom: 2px solid vars.$c-grey-100;
+				}
+
+				a:nth-child(2) {
+					color: red;
+				}
+				
 			}
 
 			.content {
